@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setToggleMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 const WatchPage = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -11,7 +12,7 @@ const WatchPage = () => {
     dispatch(setToggleMenu());
   }, []);
   return (
-    <>
+    <div className="flex w-full">
       <div className="flex flex-col">
         <div>
           WatchPage
@@ -31,7 +32,14 @@ const WatchPage = () => {
           <CommentsContainer />
         </div>
       </div>
-    </>
+
+      <div className="w-full"  >
+         <h1>Live Chat</h1>
+         <div>
+            <LiveChat/>
+         </div>
+      </div>
+    </div>
   );
 };
 
