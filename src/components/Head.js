@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import {
-  YOUTUBE_SEARCH_API,
-  YOUTUBE_SEARCH_VIDEO_API,
-} from "../utils/constants";
-import { addSearchVideo } from "../utils/searchDataSlice";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { addSearchData } from "../utils/searchSlice";
 import { useNavigate } from "react-router-dom";
-
-
+import {
+  MenuIcon,
+  MicrophoneIcon,
+  BellIcon,
+  VideoCameraIcon,
+} from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 const Head = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -18,17 +19,11 @@ const Head = () => {
   const cacheResult = useSelector((store) => store.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(isResultOpen)
   const handleClickHamburger = () => {
     dispatch(toggleMenu());
   };
 
   useEffect(() => {
-    //calling the search Api whenever searchValue will chnage;
-    //We are tryng to apply debaouncing here to prevent unnecessary rendering!!!
-    //setTimeout is used here to delay the execution of getSearchData by 300ms,
-    //This delay is to prevent unnecessary API calls when user is typing fast.
-    //{"iphone":["i","ip","iphone"]}
     let time = setTimeout(() => {
       if (cacheResult[searchValue]) {
         setSearchResult(cacheResult[searchValue]);
@@ -41,7 +36,6 @@ const Head = () => {
       clearTimeout(time);
     };
   }, [searchValue]);
-
 
   const getSearchData = async () => {
     const response = await fetch(YOUTUBE_SEARCH_API + searchValue);
@@ -57,69 +51,118 @@ const Head = () => {
   };
 
   const handleSearchData = async (query) => {
-   // console.log("Navigating to search page with query:", query);
     navigate(`/searchWatch?q=${query}`);
     setIsResultOpen(false);
-
   };
+
   return (
-    searchResult && (
-      <div className="grid grid-flow-col p-3 m-2 shadow-lg">
-        <div className="flex">
+    <header className="flex items-center justify-between p-4 shadow-md bg-white w-full sticky top-0 z-50">
+      <div className="flex items-center space-x-4">
+        <MenuIcon
+          onClick={handleClickHamburger}
+          className="h-6 w-6 cursor-pointer"
+        />
+        <Link to="/">
           <img
-            className="h-8 w-8 cursor-pointer"
-            onClick={() => handleClickHamburger()}
-            src="https://w7.pngwing.com/pngs/616/930/png-transparent-hamburger-button-computer-icons-menu-bar-line-thumbnail.png"
-            alt="hamburger"
+            className="h-8 mx-2"
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+            alt="youtube-logo"
           />
-
-          <img
-            className="h-8  mx-2"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm7GwM7oE-rQcV4an0eDYMMKDHc7wdMx6tKw&s"
-            alt="yotube-icon"
-          />
-        </div>
-        <div className="col-span-10 px-10">
-          <div>
-            <input
-              onChange={(e) => setSearchValue(e.target.value)}
-              value={searchValue}
-              className="p-2 w-1/2 border border-gray-400 rounded-l-full"
-              type="text"
-              onFocus={()=>setIsResultOpen(true)}  
-            />
-            <button className="border border-gray-400 p-2 px-5 rounded-r-full bg-gray-100">
-              🔍
-            </button>
-          </div>
-
-          { searchResult.length > 0 && isResultOpen&& (
-            <div className="px-2 py-2 bg-white absolute w-[34rem] border border-gray-100 rounded-lg">
-              <ul>
-                {searchResult.map((el, index) => (
-                 
-                    <li
-                      onClick={() => handleSearchData(el)}
-                      className="hover:bg-slate-100 px-2 mx-2"
-                    >
-                      🔍 {el}
-                    </li>
-                  
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-
-        <div className="col-span-1">
-          <img
-            className="h-8"
-            src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
-            alt="profile"
-          />
-        </div>
+        </Link>
       </div>
-    )
+      <div className="relative flex items-center flex-grow max-w-md sm:max-w-lg md:max-w-2xl">
+        <input
+          onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
+          className="p-2 w-full border border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500"
+          type="text"
+          onFocus={() => setIsResultOpen(true)}
+          placeholder="Search"
+        />
+        <button className="border-l border-gray-300 p-2 px-4 bg-gray-100 hover:bg-gray-200 flex justify-center items-center rounded-r-full">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="7"
+              stroke="black"
+              strokeWidth="2"
+              fill="none"
+            ></circle>
+            <line
+              x1="16"
+              y1="16"
+              x2="21"
+              y2="21"
+              stroke="black"
+              strokeWidth="2"
+            ></line>
+          </svg>
+        </button>
+        <MicrophoneIcon className="h-6 w-6 ml-2 hidden sm:inline cursor-pointer" />
+      </div>
+      <div className="flex items-center space-x-4">
+        <VideoCameraIcon className="h-6 w-6 hidden sm:inline cursor-pointer" />
+        <div className="relative">
+          <BellIcon className="h-6 w-6 cursor-pointer" />
+          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+            2
+          </span>
+        </div>
+        <img
+          className="h-8 w-8 rounded-full"
+          src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
+          alt="profile"
+        />
+      </div>
+      {searchResult.length > 0 && isResultOpen && (
+        <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-full max-w-md sm:max-w-lg md:max-w-2xl bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+          <ul>
+            {searchResult.map((el, index) => (
+              <li
+                key={index}
+                onClick={() => handleSearchData(el)}
+                className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <circle
+                    cx="11"
+                    cy="11"
+                    r="7"
+                    stroke="black"
+                    strokeWidth="2"
+                    fill="none"
+                  ></circle>
+                  <line
+                    x1="16"
+                    y1="16"
+                    x2="21"
+                    y2="21"
+                    stroke="black"
+                    strokeWidth="2"
+                  ></line>
+                </svg>
+                <span>{el}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </header>
   );
 };
 

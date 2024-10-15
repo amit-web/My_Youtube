@@ -6,5 +6,5 @@ export const YOUTUBE_SEARCH_API = "http://suggestqueries.google.com/complete/sea
 
 export const  YOUTUBE_SEARCH_VIDEO_API = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&regionCode=IN&q="
 
-
+export const LIVE_CHAT_COUNT = 30;
 

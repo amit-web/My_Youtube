@@ -8,13 +8,6 @@ const LiveChat = () => {
   const [liveMessage, setLiveMessage] = useState("");
   const dispatch = useDispatch()
   const chatData = useSelector((store)=>store.chat.chatInfo)
-//   const liveChatData = [
-//     {
-//       userName: "user1",
-//       message: "Hello, how are you?",
-//     },
-//   ];
-
   useEffect(() => {
     let clearVariable = setInterval(() => {
       //Api polling
@@ -27,8 +20,6 @@ const LiveChat = () => {
     console.log(chatData)
     return(()=> clearInterval(clearVariable))
   }, [chatData]);
-
-
   return (
    <>
     <div className="border  border-black w-full mt-6 ml-2 p-2 h-[600px] overflow-y-scroll flex flex-col-reverse">
@@ -45,10 +36,8 @@ const LiveChat = () => {
             message: liveMessage,
         }))
        } }>
-
          <input value={liveMessage} className="w-52 p-2 m-2" type="text" onChange={(e)=>setLiveMessage(e.target.value)} />
          <button className="bg-green-100 w-20 px-2 mx-2">Send</button>
-
     </form>
    
    
