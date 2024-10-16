@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addSearchVideo } from "../utils/searchDataSlice";
 import { YOUTUBE_SEARCH_VIDEO_API } from "../utils/constants";
-import VideoCard from "./VideoCard";
 import VideoSuggestion from "./VideoSuggestion";
 
 const SearchVideo = () => {

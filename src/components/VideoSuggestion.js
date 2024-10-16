@@ -1,7 +1,7 @@
 import React from "react";
 
 const VideoSuggestion = ({ videos }) => {
-  const { snippet, id } = videos;
+  const {snippet} = videos;
   const { thumbnails, title, channelTitle, description, publishTime } = snippet;
 
   const formatTimestamp = (timestamp) => {
