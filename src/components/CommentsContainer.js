@@ -74,13 +74,13 @@ const commentsData = [
   ];
   
 
-const CommentsContainer = () => {
-  return (
-    <div className='m-5 p-2'>
-       <h1 className='text-2xl font-bold'>Comments:</h1>
-       <CommentList commentsData={commentsData}/>
-    </div>
-  )
-}
-
-export default CommentsContainer
+  const CommentsContainer = () => {
+    return (
+      <div className="m-5 p-2 bg-white rounded-lg shadow-lg">
+        <h1 className="text-xl font-semibold mb-4">Comments:</h1>
+        <CommentList commentsData={commentsData} />
+      </div>
+    );
+  };
+  
+  export default CommentsContainer;

@@ -1,15 +1,19 @@
 import React from "react";
 
-const ChatMessage = ({data}) => {
-
+const ChatMessage = ({ data }) => {
   return (
-    <div className="flex w-full  shadow-md bg-gray-100 m-2">
-      <div className="p-2 mx-2 rounded-full">
-        <img  className="h-10 w-10" src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png" alt="userProfile" />
+    <div className="flex items-center w-full shadow-sm bg-gray-100 p-3 mb-2 rounded-lg">
+      <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
+        <img
+          className="w-full h-full object-cover"
+          src="https://images.rawpixel.com/image_png_social_square/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
+          alt="userProfile"
+        />
       </div>
+
       <div>
-        <h2>{data.userName}</h2>
-        <span>{data.message}</span>
+        <h2 className="font-semibold">{data.userName}</h2>
+        <p>{data.message}</p>
       </div>
     </div>
   );

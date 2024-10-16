@@ -56,7 +56,7 @@ const Head = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 shadow-md bg-white w-full sticky top-0 z-50">
+    <header className="flex items-center justify-between p-2 bg-white w-full sticky top-0 z-50">
       <div className="flex items-center space-x-4">
         <MenuIcon
           onClick={handleClickHamburger}
@@ -64,7 +64,7 @@ const Head = () => {
         />
         <Link to="/">
           <img
-            className="h-8 mx-2"
+            className="h-8 w-20 mx-2"
             src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
             alt="youtube-logo"
           />
@@ -74,12 +74,12 @@ const Head = () => {
         <input
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue}
-          className="p-2 w-full border border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="px-4 w-full h-9 border border-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-blue-500"
           type="text"
           onFocus={() => setIsResultOpen(true)}
           placeholder="Search"
         />
-        <button className="border-l border-gray-300 p-2 px-4 bg-gray-100 hover:bg-gray-200 flex justify-center items-center rounded-r-full">
+        <button className="border-l h-9 border-gray-300 p-2 px-4 bg-gray-100 hover:bg-gray-200 flex justify-center items-center rounded-r-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

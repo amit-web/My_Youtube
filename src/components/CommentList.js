@@ -4,17 +4,16 @@ import Comments from "./Comments";
 const CommentList = ({ commentsData }) => {
   return (
     <>
-      {commentsData.map((comment, i) => {
-        return (
-          <div key={i}>
-            <Comments  data={comment} />
-
-            <div className="pl-5 border border-l-black ml-5">
-                 <CommentList  commentsData = {comment.replies} />
+      {commentsData.map((comment, i) => (
+        <div key={i} className="ml-4">
+          <Comments data={comment} />
+          {comment.replies && comment.replies.length > 0 && (
+            <div className="pl-5 border-l-2 border-gray-300">
+              <CommentList commentsData={comment.replies} />
             </div>
-          </div>
-        );
-      })}
+          )}
+        </div>
+      ))}
     </>
   );
 };

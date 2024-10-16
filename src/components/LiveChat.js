@@ -6,42 +6,57 @@ import { generateMessage, generateName } from "../utils/helper";
 
 const LiveChat = () => {
   const [liveMessage, setLiveMessage] = useState("");
-  const dispatch = useDispatch()
-  const chatData = useSelector((store)=>store.chat.chatInfo)
-  useEffect(() => {
-    let clearVariable = setInterval(() => {
-      //Api polling
-      console.log("Api polling");
-      dispatch(addMessage( {
-        userName:generateName(),
-        message: generateMessage(),
-      }))
-    }, 2000);
-    console.log(chatData)
-    return(()=> clearInterval(clearVariable))
-  }, [chatData]);
-  return (
-   <>
-    <div className="border  border-black w-full mt-6 ml-2 p-2 h-[600px] overflow-y-scroll flex flex-col-reverse">
-        {chatData.map((chat,index)=>{
-            return  <ChatMessage key={index} data={chat} />
-        })}
-   
-    </div>
+  const dispatch = useDispatch();
+  const chatData = useSelector((store) => store.chat.chatInfo);
 
-    <form className="w-full p-2 ml-2 border border-black" onSubmit={(e)=>{
-        e.preventDefault()
-        dispatch(addMessage({
-            userName:"Amit Mehta",
-            message: liveMessage,
-        }))
-       } }>
-         <input value={liveMessage} className="w-52 p-2 m-2" type="text" onChange={(e)=>setLiveMessage(e.target.value)} />
-         <button className="bg-green-100 w-20 px-2 mx-2">Send</button>
-    </form>
-   
-   
-   </>
+  useEffect(() => {
+    const clearVariable = setInterval(() => {
+      // API polling
+      console.log("API polling");
+      dispatch(
+        addMessage({
+          userName: generateName(),
+          message: generateMessage(),
+        })
+      );
+    }, 2000);
+
+    return () => clearInterval(clearVariable);
+  }, [dispatch]);
+
+  return (
+    <>
+      <div className="border border-gray-300 w-full mt-6 p-2 h-[600px] overflow-y-scroll flex flex-col-reverse bg-white rounded-lg shadow-md">
+        {chatData.map((chat, index) => {
+          return <ChatMessage key={index} data={chat} />;
+        })}
+      </div>
+
+      <form
+        className="w-full p-2 mt-2 border border-gray-300 bg-white rounded-lg shadow-md flex items-center"
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(
+            addMessage({
+              userName: "Amit Mehta",
+              message: liveMessage,
+            })
+          );
+          setLiveMessage("");
+        }}
+      >
+        <input
+          value={liveMessage}
+          className="flex-1 p-2 m-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          type="text"
+          onChange={(e) => setLiveMessage(e.target.value)}
+          placeholder="Type your message..."
+        />
+        <button className="bg-green-100 w-24 px-4 py-2 rounded-md hover:bg-green-200 transition duration-200">
+          Send
+        </button>
+      </form>
+    </>
   );
 };
 

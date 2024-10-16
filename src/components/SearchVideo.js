@@ -8,14 +8,13 @@ import VideoSuggestion from "./VideoSuggestion";
 
 const SearchVideo = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("q"); // Get the query parameter from URL
+  const query = searchParams.get("q"); 
   const dispatch = useDispatch();
   const searchVideos = useSelector((store) => store.searchData.searchResult);
 
   useEffect(() => {
     // Fetch search result videos when the component mounts
     const fetchSearchVideos = async () => {
-      console.log("Running!!");
       const response = await fetch(
         YOUTUBE_SEARCH_VIDEO_API +
           query +
@@ -25,11 +24,10 @@ const SearchVideo = () => {
       console.log("API Response:", getData);
       if (getData.items) {
         console.log("Dispatching search data:", getData.items);
-        dispatch(addSearchVideo(getData.items)); // Dispatch the action to store data
+        dispatch(addSearchVideo(getData.items)); 
       } else {
         console.log("No items found in the API response.");
       }
-      // Store video results in Redux
     };
 
     if (query) {
@@ -39,10 +37,8 @@ const SearchVideo = () => {
 
   return (
     <div>
-      <h2>Search Results for: {query}</h2>
       {searchVideos?.length ? (
         <div className="">
-          {/* Render the videos here */}
           {searchVideos.map((video) => {
             return (
               <>

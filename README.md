@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+1.first Header sidebar buttonlist should  be fixed on the position.
+2.clicking on hamburger only icon page list should be shown and body page will take care of all width of page
+3.Header sidebar should not look like shadowed, it will be simple and as like youtube and responsive.
+4.Infinite scrolling;
+5.buttonList clicking bothside should work like curousels.
+
+

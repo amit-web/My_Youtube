@@ -33,8 +33,7 @@ function App() {
   return (
     <div>
       <Provider store={store}>
-        <RouterProvider router={appRoute}>
-          <Head />
+        <RouterProvider router={appRoute}>  
           <Body />
         </RouterProvider>
       </Provider>

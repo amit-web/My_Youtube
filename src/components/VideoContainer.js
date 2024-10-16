@@ -2,23 +2,29 @@ import React, { useEffect, useState } from "react";
 import { MOST_POPULAR_VIDEO_URL } from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addPopularVideo } from "../utils/popularSlice";
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState([]);
-  
+
+ const dispatch = useDispatch();
+ const  videos = useSelector((store)=>store.popular.popularVideo)
   useEffect(() => {
     getVideo();
   }, []);
 
+
   const getVideo = async () => {
     const response = await fetch(MOST_POPULAR_VIDEO_URL);
-
     const data = await response.json();
-
-    setVideos(data.items);
-   
+    console.log(data.items);
+    dispatch(addPopularVideo(data.items))
+    // setVideos(data.items);
   };
-  if(!videos)return null;
+
+  if (!videos || videos.length === 0) {
+    return <p>Loading videos...</p>; 
+  }
 
   return (
     <div className="container mx-auto p-4">
