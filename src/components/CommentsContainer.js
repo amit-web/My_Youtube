@@ -71,6 +71,11 @@ const commentsData = [
       text: "lorem ipsum dolor sit amet, consectetur adipiscing",
       replies: [],
     },
+    {
+      name: "Amit Mehta",
+      text: "lorem ipsum dolor sit amet, consectetur adipiscing",
+      replies: [],
+    },
   ];
   
 

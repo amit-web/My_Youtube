@@ -37,7 +37,7 @@ const ButtonList = () => {
   ];
 
   const [startIndex, setStartIndex] = useState(0);
-  const itemsPerPage = 10; // Number of visible buttons
+  const itemsPerPage = 11; 
   const totalItems = list.length;
 
   const handleForward = () => {

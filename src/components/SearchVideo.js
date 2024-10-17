@@ -12,7 +12,6 @@ const SearchVideo = () => {
   const searchVideos = useSelector((store) => store.searchData.searchResult);
 
   useEffect(() => {
-    // Fetch search result videos when the component mounts
     const fetchSearchVideos = async () => {
       const response = await fetch(
         YOUTUBE_SEARCH_VIDEO_API +
